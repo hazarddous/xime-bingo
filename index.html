@@ -14,18 +14,27 @@
 <div class="eyebrow">XIME BANGALORE · CAMPUS CHALLENGE · 2026</div>
 <h1>Find your people.<br><em>Complete the board.</em></h1>
 <p>25 campus challenges. Every completed square is recorded with your name, roll number, section and exact completion time.</p>
+
+<div class="auth-tabs"><button id="newTab" class="tab active">New participant</button><button id="returnTab" class="tab">Already registered</button></div>
+
 <form id="joinForm"><div class="fields">
 <label>Full name<input id="name" required maxlength="80" autocomplete="name" placeholder="Your full name"></label>
 <label>Roll number<input id="roll" required maxlength="30" placeholder="32074"></label>
 <label>Section<select id="section" required><option value="">Choose section</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
-</div><button class="primary">Enter XIME Bingo <span>→</span></button></form>
-<div class="fine">Your participant session is saved on this device. Ask the event team if you need help.</div>
+<label>Choose a 4-digit PIN<input id="pin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234"></label>
+</div><button class="primary">Create my Bingo account <span>→</span></button></form>
+
+<form id="loginFormStudent" class="hidden"><div class="fields single">
+<label>Roll number<input id="loginRoll" required maxlength="30" inputmode="numeric" placeholder="32074"></label>
+<label>4-digit PIN<input id="loginPin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234"></label>
+</div><button class="primary">Continue to my board <span>→</span></button><div id="studentLoginError" class="error"></div></form>
+
+<div class="fine" id="authFine">Use your roll number + PIN next time you open XIME Bingo. Keep your PIN private.</div>
 </section>
 
 <section id="game" class="hidden">
 <div class="game-top"><div><div class="eyebrow">XIME BINGO · <span id="who"></span></div><h2>Your board.</h2><p>Complete a challenge, then tap its square. Completed squares cannot be undone.</p></div><div class="counter"><strong id="count">0</strong><span>/ 25 complete</span></div></div>
 <div id="grid" class="grid"></div><div id="bingo" class="bingo hidden"></div>
-<button id="switch" class="link">Switch participant</button>
 </section>
 
 <section id="admin" class="hidden">
