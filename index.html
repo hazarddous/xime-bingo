@@ -15,7 +15,7 @@
   <a class="brand"><span class="x">X</span><span>XIME <b>Bingo</b></span></a>
   <div class="nav-right">
     <span id="connection" class="status"><i></i> Connecting</span>
-    <button id="leaderboardOpen" class="nav-action">🏆 <span>Leaderboard</span></button>
+    <button id="leaderboardOpen" class="nav-action trophy-button" aria-label="Open top 5 leaderboard" title="Top 5 leaderboard">🏆</button>
     <button id="themeToggle" class="nav-action" aria-label="Toggle dark mode">☾</button>
     <button id="adminOpen" class="outline">Admin</button>
   </div>
@@ -24,7 +24,7 @@
 <main class="wrap">
 <section id="home" class="panel intro">
   <div class="eyebrow">XIME BANGALORE · CAMPUS CHALLENGE · 2026</div>
-  <div class="hero-chip">25 TASKS · REAL-TIME SCORE · LIVE TOP 10</div>
+  <div class="hero-chip">25 TASKS · REAL-TIME SCORE · LIVE TOP 5</div>
   <h1>Find your people.<br><em>Own the board.</em></h1>
   <p>Complete campus challenges, get your proof verified in the event WhatsApp group, then lock the square on XIME Bingo. Every mark is permanent.</p>
 
@@ -82,7 +82,7 @@
     <article class="step verify"><span>05</span><div><b>Get verified 👍</b><p>Wait for an event admin to give your proof a thumbs-up.</p></div></article>
     <article class="step"><span>06</span><div><b>Mark complete</b><p>Only after verification, tap the matching Bingo square.</p></div></article>
     <article class="step"><span>07</span><div><b>Watch your score</b><p>Task points and Bingo-line bonuses update live.</p></div></article>
-    <article class="step win"><span>08</span><div><b>Climb the leaderboard</b><p>Top 10 scores are visible live throughout the event.</p></div></article>
+    <article class="step win"><span>08</span><div><b>Climb the leaderboard</b><p>Top 5 scores are visible live throughout the event.</p></div></article>
   </div>
 
   <div class="rules-grid">
@@ -94,7 +94,6 @@
 
   <div class="instruction-actions">
     <button id="openBoard" class="primary">I understand — open my Bingo card <span>→</span></button>
-    <button id="instructionsLeaderboard" class="secondary">View live leaderboard</button>
   </div>
 </section>
 
@@ -110,7 +109,6 @@
 
   <div class="board-tools">
     <button id="showInstructions" class="secondary">How it works</button>
-    <button id="boardLeaderboard" class="secondary">🏆 Top 10</button>
   </div>
 
   <div class="line-panel">
@@ -134,7 +132,7 @@
 <dialog id="leaderboard" class="wide-dialog">
   <div class="dialog-inner">
     <button type="button" class="xclose" id="closeLeaderboard">×</button>
-    <div class="eyebrow">LIVE EVENT · TOP 10</div>
+    <div class="eyebrow">LIVE EVENT · TOP 5</div>
     <div class="leader-title"><div><h3>Leaderboard</h3><p>Scores update as verified tasks are locked on the board.</p></div><span id="leaderLive">● LIVE</span></div>
     <div class="score-rule"><b>Scoring:</b> Easy 1 · Challenge 2 · Crazy 3 &nbsp;|&nbsp; First line +5 &nbsp;|&nbsp; Second line +5</div>
     <div id="leaderRows" class="leader-rows"><div class="loading">Loading live scores…</div></div>
