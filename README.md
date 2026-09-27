@@ -1,4 +1,4 @@
-# XIME Bingo — Production deployment update 2.2
+# XIME Bingo — Production deployment update 2.3
 
 ## What this version does
 - Shared database for every student/device
