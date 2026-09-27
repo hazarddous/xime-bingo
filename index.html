@@ -20,7 +20,16 @@
 <form id="joinForm"><div class="fields">
 <label>Full name<input id="name" required maxlength="80" autocomplete="name" placeholder="Your full name"></label>
 <label>Roll number<input id="roll" required maxlength="30" placeholder="32074"></label>
-<label>Section<select id="section" required><option value="">Choose section</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Batch<select id="batch" required>
+  <option value="">Choose batch</option>
+  <option value="Batch 31">Batch 31</option>
+  <option value="Batch 32">Batch 32</option>
+  <option value="BA05">BA05</option>
+  <option value="BA06">BA06</option>
+</select></label>
+<label>Section<select id="section" required disabled>
+  <option value="">Choose batch first</option>
+</select></label>
 <label>Choose a 4-digit PIN<input id="pin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234"></label>
 </div><button class="primary">Create my Bingo account <span>→</span></button></form>
 
@@ -40,8 +49,8 @@
 <section id="admin" class="hidden">
 <div class="game-top"><div><div class="eyebrow">XIME BINGO · ADMIN</div><h2>Live event board.</h2><p>Participant progress and exact task completion times.</p></div><div class="admin-tools"><button id="refresh" class="outline">Refresh</button><button id="logout" class="outline">Log out</button></div></div>
 <div class="stats"><div><span>Participants</span><strong id="people">—</strong></div><div><span>Tasks completed</span><strong id="tasks">—</strong></div><div><span>Full boards</span><strong id="full">—</strong></div></div>
-<div class="filters"><input id="search" placeholder="Search name or roll number…"><select id="secFilter"><option value="">All sections</option><option>A</option><option>B</option><option>C</option><option>D</option></select><button id="csv" class="primary compact">Export CSV</button></div>
-<div class="tablebox"><table><thead><tr><th>Participant</th><th>Roll</th><th>Section</th><th>Progress</th><th>Latest</th><th>Task timeline</th></tr></thead><tbody id="tbody"></tbody></table></div>
+<div class="filters"><input id="search" placeholder="Search name, roll number or batch…"><select id="batchFilter"><option value="">All batches</option><option>Batch 31</option><option>Batch 32</option><option>BA05</option><option>BA06</option></select><select id="secFilter"><option value="">All sections</option><option>A</option><option>B</option><option>C</option><option>D</option><option>BA</option></select><button id="csv" class="primary compact">Export CSV</button></div>
+<div class="tablebox"><table><thead><tr><th>Participant</th><th>Roll</th><th>Batch</th><th>Section</th><th>Progress</th><th>Latest</th><th>Task timeline</th></tr></thead><tbody id="tbody"></tbody></table></div>
 </section>
 </main>
 
