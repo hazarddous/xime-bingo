@@ -25,7 +25,7 @@ const difficultyLabel=d=>d==="easy"?"Easy":d==="crazy"?"Crazy":"Challenge";
 function show(id){["home","instructions","game","admin"].forEach(x=>$(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})}
 function toast(msg){$("toast").textContent=msg;$("toast").classList.remove("hidden");clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").classList.add("hidden"),3200)}
 function setStatus(ok,text){$("connection").className="status "+(ok?"ok":"bad");$("connection").innerHTML=`<i></i> ${text}`}
-function applyTheme(){const dark=localStorage.getItem("ximeTheme")==="dark";document.body.classList.toggle("dark",dark);$("themeToggle").textContent=dark?"☀":"☾"}
+function applyTheme(){const dark=localStorage.getItem("ximeTheme")!=="light";document.body.classList.toggle("dark",dark);$("themeToggle").textContent=dark?"☀":"☾"}
 function setAuthMode(mode){
   const register=mode==="register";
   $("joinForm").classList.toggle("hidden",!register);$("loginFormStudent").classList.toggle("hidden",register);
@@ -92,9 +92,9 @@ async function renderGame(){
   $("grid").innerHTML=TASKS.map((t,i)=>{
     const ts=map.get(t.id),lineHit=lineKeys.size&&LINE_DEFS.some(line=>lineKeys.has(line.key)&&line.pos.includes(t.sort_order));
     return `<button class="cell ${ts?"done":""} ${lineHit?"line-hit":""}" data-task="${t.id}" ${ts?"aria-pressed=\"true\"":""}>
-      <span class="cell-top"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="difficulty ${t.difficulty}">${pointsFor(t.difficulty)} · ${difficultyLabel(t.difficulty)}</span></span>
+      <span class="cell-top"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="points-badge">${pointsFor(t.difficulty)} pt${pointsFor(t.difficulty)===1?"":"s"}</span></span>
       <span class="task">${escapeHtml(t.task_text)}</span>
-      <span class="done-text">${ts?"✓ LOCKED · "+new Date(ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}):"Post proof → get 👍 → tap"}</span>
+      ${ts?`<span class="locked-mark">✓ ${new Date(ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</span>`:""}
       ${lineHit?'<span class="line-mark">BINGO LINE</span>':""}
     </button>`;
   }).join("");
@@ -131,14 +131,14 @@ $("loginFormStudent").onsubmit=async e=>{
   const r=await loginParticipant($("loginRoll").value.trim(),$("loginPin").value.trim());if(r.error)$("studentLoginError").textContent=r.error;b.disabled=false;b.innerHTML='Continue to my board <span>→</span>';
 };
 async function loadLeaderboard(){
-  const {data,error}=await client.rpc("get_leaderboard",{p_limit:10});
+  const {data,error}=await client.rpc("get_leaderboard",{p_limit:5});
   if(error){$("leaderRows").innerHTML='<div class="loading">Leaderboard is temporarily unavailable.</div>';return}
   const rows=data||[];
   $("leaderRows").innerHTML=rows.length?rows.map((r,i)=>`<div class="leader-row ${participant&&r.participant_id===participant.id?"me":""}"><div class="rank rank-${i+1}">${i<3?["🥇","🥈","🥉"][i]:r.rank}</div><div class="leader-person"><b>${escapeHtml(r.name)}</b><span>${escapeHtml(r.batch||"")} · Sec ${escapeHtml(r.section||"")}</span></div><div class="leader-progress"><b>${r.total_score}</b><span>${r.completed_count}/25 · ${r.bingo_lines} lines</span></div></div>`).join(""):'<div class="loading">No scores yet. Be the first on the board.</div>';
 }
 function openLeaderboard(){$("leaderboard").showModal();loadLeaderboard();clearInterval(leaderTimer);leaderTimer=setInterval(loadLeaderboard,5000)}
 function closeLeaderboard(){clearInterval(leaderTimer);$("leaderboard").close()}
-$("leaderboardOpen").onclick=openLeaderboard;$("instructionsLeaderboard").onclick=openLeaderboard;$("boardLeaderboard").onclick=openLeaderboard;$("closeLeaderboard").onclick=closeLeaderboard;
+$("leaderboardOpen").onclick=openLeaderboard;$("closeLeaderboard").onclick=closeLeaderboard;
 $("themeToggle").onclick=()=>{const dark=document.body.classList.toggle("dark");localStorage.setItem("ximeTheme",dark?"dark":"light");$("themeToggle").textContent=dark?"☀":"☾"};
 $("adminOpen").onclick=()=>$("login").showModal();$("closeLogin").onclick=()=>$("login").close();
 $("loginForm").onsubmit=async e=>{e.preventDefault();$("loginError").textContent="";const {data,error}=await client.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(error){$("loginError").textContent=error.message;return}adminUser=data.user;await openAdmin();$("login").close()};
