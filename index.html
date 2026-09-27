@@ -1,61 +1,164 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
 <title>XIME Bingo — 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="nav"><a class="brand"><span class="x">X</span><span>XIME <b>Bingo</b></span></a><div class="nav-right"><span id="connection" class="status"><i></i> Connecting</span><button id="adminOpen" class="outline">Admin</button></div></header>
+<header class="nav">
+  <a class="brand"><span class="x">X</span><span>XIME <b>Bingo</b></span></a>
+  <div class="nav-right">
+    <span id="connection" class="status"><i></i> Connecting</span>
+    <button id="leaderboardOpen" class="nav-action">🏆 <span>Leaderboard</span></button>
+    <button id="themeToggle" class="nav-action" aria-label="Toggle dark mode">☾</button>
+    <button id="adminOpen" class="outline">Admin</button>
+  </div>
+</header>
+
 <main class="wrap">
 <section id="home" class="panel intro">
-<div class="eyebrow">XIME BANGALORE · CAMPUS CHALLENGE · 2026</div>
-<h1>Find your people.<br><em>Complete the board.</em></h1>
-<p>25 campus challenges. Every completed square is recorded with your name, roll number, section and exact completion time.</p>
+  <div class="eyebrow">XIME BANGALORE · CAMPUS CHALLENGE · 2026</div>
+  <div class="hero-chip">25 TASKS · REAL-TIME SCORE · LIVE TOP 10</div>
+  <h1>Find your people.<br><em>Own the board.</em></h1>
+  <p>Complete campus challenges, get your proof verified in the event WhatsApp group, then lock the square on XIME Bingo. Every mark is permanent.</p>
 
-<div class="auth-tabs"><button id="newTab" class="tab active">New participant</button><button id="returnTab" class="tab">Already registered</button></div>
+  <div class="auth-tabs">
+    <button id="newTab" class="tab active">New participant</button>
+    <button id="returnTab" class="tab">Already registered</button>
+  </div>
 
-<form id="joinForm"><div class="fields">
-<label>Full name<input id="name" required maxlength="80" autocomplete="name" placeholder="Your full name"></label>
-<label>Roll number<input id="roll" required maxlength="30" placeholder="32074"></label>
-<label>Batch<select id="batch" required>
-  <option value="">Choose batch</option>
-  <option value="Batch 31">Batch 31</option>
-  <option value="Batch 32">Batch 32</option>
-  <option value="BA05">BA05</option>
-  <option value="BA06">BA06</option>
-</select></label>
-<label>Section<select id="section" required disabled>
-  <option value="">Choose batch first</option>
-</select></label>
-<label>Choose a 4-digit PIN<input id="pin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234"></label>
-</div><button class="primary">Create my Bingo account <span>→</span></button></form>
+  <form id="joinForm">
+    <div class="fields">
+      <label>Full name<input id="name" required maxlength="80" autocomplete="name" placeholder="Your full name"></label>
+      <label>Roll number<input id="roll" required maxlength="30" inputmode="numeric" placeholder="32074"></label>
+      <label>Batch<select id="batch" required>
+        <option value="">Choose batch</option>
+        <option value="Batch 31">Batch 31</option>
+        <option value="Batch 32">Batch 32</option>
+        <option value="BA05">BA05</option>
+        <option value="BA06">BA06</option>
+      </select></label>
+      <label>Section<select id="section" required disabled>
+        <option value="">Choose batch first</option>
+      </select></label>
+      <label class="wide">Choose a 4-digit PIN<input id="pin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="Keep this private"></label>
+    </div>
+    <button class="primary">Create my Bingo account <span>→</span></button>
+  </form>
 
-<form id="loginFormStudent" class="hidden"><div class="fields single">
-<label>Roll number<input id="loginRoll" required maxlength="30" inputmode="numeric" placeholder="32074"></label>
-<label>4-digit PIN<input id="loginPin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234"></label>
-</div><button class="primary">Continue to my board <span>→</span></button><div id="studentLoginError" class="error"></div></form>
+  <form id="loginFormStudent" class="hidden">
+    <div class="fields single">
+      <label>Roll number<input id="loginRoll" required maxlength="30" inputmode="numeric" placeholder="32074"></label>
+      <label>4-digit PIN<input id="loginPin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="••••"></label>
+    </div>
+    <button class="primary">Continue to my board <span>→</span></button>
+    <div id="studentLoginError" class="error"></div>
+  </form>
 
-<div class="fine" id="authFine">Use your roll number + PIN next time you open XIME Bingo. Keep your PIN private.</div>
+  <div class="fine" id="authFine">Use your roll number + PIN next time you open XIME Bingo. Keep your PIN private.</div>
+</section>
+
+<section id="instructions" class="hidden">
+  <div class="instruction-hero">
+    <div>
+      <div class="eyebrow">BEFORE YOU START</div>
+      <h2>Proof first. <em>Tap second.</em></h2>
+      <p>Your square becomes permanent the moment you mark it. Do not tap until an event admin has verified your proof with a 👍 in the official WhatsApp group.</p>
+    </div>
+    <div class="instruction-lock">🔒<span>Permanent marks</span></div>
+  </div>
+
+  <div class="steps">
+    <article class="step"><span>01</span><div><b>Register</b><p>Create your XIME Bingo account.</p></div></article>
+    <article class="step"><span>02</span><div><b>Access the site</b><p>Open your personal board after joining.</p></div></article>
+    <article class="step"><span>03</span><div><b>Complete the task</b><p>Do the challenge exactly as written.</p></div></article>
+    <article class="step"><span>04</span><div><b>Post proof</b><p>Post your proof in the official event WhatsApp group.</p></div></article>
+    <article class="step verify"><span>05</span><div><b>Get verified 👍</b><p>Wait for an event admin to give your proof a thumbs-up.</p></div></article>
+    <article class="step"><span>06</span><div><b>Mark complete</b><p>Only after verification, tap the matching Bingo square.</p></div></article>
+    <article class="step"><span>07</span><div><b>Watch your score</b><p>Task points and Bingo-line bonuses update live.</p></div></article>
+    <article class="step win"><span>08</span><div><b>Climb the leaderboard</b><p>Top 10 scores are visible live throughout the event.</p></div></article>
+  </div>
+
+  <div class="rules-grid">
+    <div><strong>1 / 2 / 3</strong><span>Easy · Challenge · Crazy</span></div>
+    <div><strong>+5</strong><span>First completed Bingo line</span></div>
+    <div><strong>+5</strong><span>Second completed Bingo line</span></div>
+    <div><strong>12 lines</strong><span>5 rows · 5 columns · 2 diagonals</span></div>
+  </div>
+
+  <div class="instruction-actions">
+    <button id="openBoard" class="primary">I understand — open my Bingo card <span>→</span></button>
+    <button id="instructionsLeaderboard" class="secondary">View live leaderboard</button>
+  </div>
 </section>
 
 <section id="game" class="hidden">
-<div class="game-top"><div><div class="eyebrow">XIME BINGO · <span id="who"></span></div><h2>Your board.</h2><p>Complete a challenge, then tap its square. Completed squares cannot be undone.</p></div><div class="counter"><strong id="count">0</strong><span>/ 25 complete</span></div></div>
-<div id="grid" class="grid"></div><div id="bingo" class="bingo hidden"></div>
+  <div class="game-head">
+    <div>
+      <div class="eyebrow">XIME BINGO · <span id="who"></span></div>
+      <h2>Your board.</h2>
+      <p>Finish → post proof → get 👍 → tap. <b>Marks cannot be undone.</b></p>
+    </div>
+    <div class="score-card"><span>YOUR SCORE</span><strong id="score">0</strong><small id="scoreMeta">0 tasks · 0 lines</small></div>
+  </div>
+
+  <div class="board-tools">
+    <button id="showInstructions" class="secondary">How it works</button>
+    <button id="boardLeaderboard" class="secondary">🏆 Top 10</button>
+  </div>
+
+  <div class="line-panel">
+    <div class="line-head"><div><b>Bingo lines</b><span>Complete any row, column or diagonal for bonus points.</span></div><strong id="lineBonus">+0 bonus</strong></div>
+    <div id="lineStatus" class="line-status"></div>
+  </div>
+
+  <div class="board-legend"><span class="dot task-dot"></span> Task points <span class="dot line-dot"></span> Completed-line bonus <span class="dot locked-dot"></span> Locked</div>
+  <div class="grid-wrap"><div id="grid" class="grid"></div></div>
+  <div id="bingo" class="bingo hidden"></div>
 </section>
 
 <section id="admin" class="hidden">
-<div class="game-top"><div><div class="eyebrow">XIME BINGO · ADMIN</div><h2>Live event board.</h2><p>Participant progress and exact task completion times.</p></div><div class="admin-tools"><button id="refresh" class="outline">Refresh</button><button id="logout" class="outline">Log out</button></div></div>
-<div class="stats"><div><span>Participants</span><strong id="people">—</strong></div><div><span>Tasks completed</span><strong id="tasks">—</strong></div><div><span>Full boards</span><strong id="full">—</strong></div></div>
-<div class="filters"><input id="search" placeholder="Search name, roll number or batch…"><select id="batchFilter"><option value="">All batches</option><option>Batch 31</option><option>Batch 32</option><option>BA05</option><option>BA06</option></select><select id="secFilter"><option value="">All sections</option><option>A</option><option>B</option><option>C</option><option>D</option><option>BA</option></select><button id="csv" class="primary compact">Export CSV</button></div>
-<div class="tablebox"><table><thead><tr><th>Participant</th><th>Roll</th><th>Batch</th><th>Section</th><th>Progress</th><th>Latest</th><th>Task timeline</th></tr></thead><tbody id="tbody"></tbody></table></div>
+  <div class="game-top"><div><div class="eyebrow">XIME BINGO · ADMIN</div><h2>Live event board.</h2><p>Participant progress, scores and exact completion times.</p></div><div class="admin-tools"><button id="refresh" class="outline">Refresh</button><button id="logout" class="outline">Log out</button></div></div>
+  <div class="stats"><div><span>Participants</span><strong id="people">—</strong></div><div><span>Tasks completed</span><strong id="tasks">—</strong></div><div><span>Full boards</span><strong id="full">—</strong></div><div><span>Highest score</span><strong id="highScore">—</strong></div></div>
+  <div class="filters"><input id="search" placeholder="Search name, roll number or batch…"><select id="batchFilter"><option value="">All batches</option><option>Batch 31</option><option>Batch 32</option><option>BA05</option><option>BA06</option></select><select id="secFilter"><option value="">All sections</option><option>A</option><option>B</option><option>C</option><option>D</option><option>BA</option></select><button id="csv" class="primary compact">Export CSV</button></div>
+  <div class="tablebox"><table><thead><tr><th>Participant</th><th>Roll</th><th>Batch</th><th>Section</th><th>Score</th><th>Progress</th><th>Latest</th><th>Task timeline</th></tr></thead><tbody id="tbody"></tbody></table></div>
 </section>
 </main>
+
+<dialog id="leaderboard" class="wide-dialog">
+  <div class="dialog-inner">
+    <button type="button" class="xclose" id="closeLeaderboard">×</button>
+    <div class="eyebrow">LIVE EVENT · TOP 10</div>
+    <div class="leader-title"><div><h3>Leaderboard</h3><p>Scores update as verified tasks are locked on the board.</p></div><span id="leaderLive">● LIVE</span></div>
+    <div class="score-rule"><b>Scoring:</b> Easy 1 · Challenge 2 · Crazy 3 &nbsp;|&nbsp; First line +5 &nbsp;|&nbsp; Second line +5</div>
+    <div id="leaderRows" class="leader-rows"><div class="loading">Loading live scores…</div></div>
+    <div class="leader-foot">Rows, columns and both diagonals count as Bingo lines.</div>
+  </div>
+</dialog>
+
+<dialog id="confirmTask">
+  <form class="modal" id="confirmTaskForm">
+    <button type="button" class="xclose" id="closeConfirm">×</button>
+    <div class="eyebrow">FINAL CHECK</div>
+    <div class="confirm-icon">👍</div>
+    <h3 id="confirmTitle">Ready to lock this square?</h3>
+    <p id="confirmTaskText"></p>
+    <label class="check-row"><input id="verifiedCheck" type="checkbox"> <span>I received an admin 👍 for my proof in the official WhatsApp group.</span></label>
+    <div class="warning">Once you mark this square, it <b>cannot be undone</b>.</div>
+    <button id="confirmSubmit" class="primary" disabled>Mark complete — lock it <span>✓</span></button>
+  </form>
+</dialog>
 
 <dialog id="login"><form id="loginForm" class="modal"><button type="button" class="xclose" id="closeLogin">×</button><div class="eyebrow">ADMIN ACCESS</div><h3>Event dashboard</h3><p>Sign in with the admin account created in Supabase Authentication.</p><label>Email<input id="email" type="email" required placeholder="admin@ximebingo.com"></label><label>Password<input id="password" type="password" required></label><button class="primary">Sign in</button><div id="loginError" class="error"></div></form></dialog>
 <div id="toast" class="toast hidden"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script><script src="app.js"></script>
-</body></html>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
