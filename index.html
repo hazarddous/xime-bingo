@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XIME Bingo — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav"><a class="brand"><span class="x">X</span><span>XIME <b>Bingo</b></span></a><div class="nav-right"><span id="connection" class="status"><i></i> Connecting</span><button id="adminOpen" class="outline">Admin</button></div></header>
+<main class="wrap">
+<section id="home" class="panel intro">
+<div class="eyebrow">XIME BANGALORE · CAMPUS CHALLENGE · 2026</div>
+<h1>Find your people.<br><em>Complete the board.</em></h1>
+<p>25 campus challenges. Every completed square is recorded with your name, roll number, section and exact completion time.</p>
+<form id="joinForm"><div class="fields">
+<label>Full name<input id="name" required maxlength="80" autocomplete="name" placeholder="Your full name"></label>
+<label>Roll number<input id="roll" required maxlength="30" placeholder="32074"></label>
+<label>Section<select id="section" required><option value="">Choose section</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+</div><button class="primary">Enter XIME Bingo <span>→</span></button></form>
+<div class="fine">Your participant session is saved on this device. Ask the event team if you need help.</div>
+</section>
+
+<section id="game" class="hidden">
+<div class="game-top"><div><div class="eyebrow">XIME BINGO · <span id="who"></span></div><h2>Your board.</h2><p>Complete a challenge, then tap its square. Completed squares cannot be undone.</p></div><div class="counter"><strong id="count">0</strong><span>/ 25 complete</span></div></div>
+<div id="grid" class="grid"></div><div id="bingo" class="bingo hidden"></div>
+<button id="switch" class="link">Switch participant</button>
+</section>
+
+<section id="admin" class="hidden">
+<div class="game-top"><div><div class="eyebrow">XIME BINGO · ADMIN</div><h2>Live event board.</h2><p>Participant progress and exact task completion times.</p></div><div class="admin-tools"><button id="refresh" class="outline">Refresh</button><button id="logout" class="outline">Log out</button></div></div>
+<div class="stats"><div><span>Participants</span><strong id="people">—</strong></div><div><span>Tasks completed</span><strong id="tasks">—</strong></div><div><span>Full boards</span><strong id="full">—</strong></div></div>
+<div class="filters"><input id="search" placeholder="Search name or roll number…"><select id="secFilter"><option value="">All sections</option><option>A</option><option>B</option><option>C</option><option>D</option></select><button id="csv" class="primary compact">Export CSV</button></div>
+<div class="tablebox"><table><thead><tr><th>Participant</th><th>Roll</th><th>Section</th><th>Progress</th><th>Latest</th><th>Task timeline</th></tr></thead><tbody id="tbody"></tbody></table></div>
+</section>
+</main>
+
+<dialog id="login"><form id="loginForm" class="modal"><button type="button" class="xclose" id="closeLogin">×</button><div class="eyebrow">ADMIN ACCESS</div><h3>Event dashboard</h3><p>Sign in with the admin account created in Supabase Authentication.</p><label>Email<input id="email" type="email" required placeholder="admin@ximebingo.com"></label><label>Password<input id="password" type="password" required></label><button class="primary">Sign in</button><div id="loginError" class="error"></div></form></dialog>
+<div id="toast" class="toast hidden"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script><script src="app.js"></script>
+</body></html>
