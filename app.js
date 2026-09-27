@@ -91,8 +91,9 @@ async function renderGame(){
   $("scoreMeta").textContent=`${score.task_points} task pts · ${score.bingo_lines} lines · +${score.bingo_bonus} bonus`;
   $("grid").innerHTML=TASKS.map((t,i)=>{
     const ts=map.get(t.id),lineHit=lineKeys.size&&LINE_DEFS.some(line=>lineKeys.has(line.key)&&line.pos.includes(t.sort_order));
-    return `<button class="cell ${ts?"done":""} ${lineHit?"line-hit":""}" data-task="${t.id}" ${ts?"aria-pressed=\"true\"":""}>
-      <span class="cell-top"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="points-badge">${pointsFor(t.difficulty)} pt${pointsFor(t.difficulty)===1?"":"s"}</span></span>
+    const pointValue=pointsFor(t.difficulty);
+    return `<button class="cell point-${pointValue} ${ts?"done":""} ${lineHit?"line-hit":""}" data-task="${t.id}" ${ts?"aria-pressed=\"true\"":""}>
+      <span class="cell-top"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="points-badge">${pointValue} pt${pointValue===1?"":"s"}</span></span>
       <span class="task">${escapeHtml(t.task_text)}</span>
       ${ts?`<span class="locked-mark">✓ ${new Date(ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</span>`:""}
       ${lineHit?'<span class="line-mark">BINGO LINE</span>':""}
