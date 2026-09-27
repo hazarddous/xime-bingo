@@ -1,4 +1,4 @@
-# XIME Bingo — Production Setup
+# XIME Bingo — Production deployment update.
 
 ## What this version does
 - Shared database for every student/device
